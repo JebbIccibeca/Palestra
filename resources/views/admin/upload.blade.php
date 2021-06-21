@@ -1,303 +1,382 @@
 @extends ('admin.layouts.adminlay')
 
 @section('content')
-
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-        <h1 class="m-0">Dashboard Videoteca</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard upload</li>
-        </ol>
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
-
-<div class="flex h-screen">
-    <div class="md:grid md:grid-cols-3 md:gap-6 ml-auto mr-auto">
-      <div class="mt-5 md:mt-0 md:col-span-2">
-
-        <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-          <div class="shadow sm:rounded-md sm:overflow-hidden">
-            <div class="px-3 py-4 bg-white space-y-6 sm:p-6">
-                @if (session('success'))
-              <p class="text-green-600 bg-green-900 rounded-lg text-center p-3 m-3">
-                {{ session('success') }}
-                <svg xmlns="http://www.w3.org/2000/svg" class="animate-bounce h-6 w-6 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-            </p>
-            @endif
-              <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3 sm:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700">
-                    Titolo
-                  </label>
-                    <input type="text" name="titolo" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="....">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3 sm:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700">
-                    Data d'uscita
-                  </label>
-                    <input type="date" name="data_uscita" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="...">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3 sm:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700">
-                    Protagonista
-                  </label>
-                    <input type="text" name="protagonista" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="...">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3 sm:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700">
-                    Regista
-                  </label>
-                    <input type="text" name="regista"  required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="...">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3 sm:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700">
-                    Età minima <a class="text-gray-200">scroll</a>
-                  </label>
-                    <input type="number" value="0" name="etamin" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="...">
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700">
-                  Copertina
-                </label>
-                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                  <div class="space-y-1 text-center">
-                    <font face="Comic sans MS" size="5" style="color: grey;">drag and drop   .jpeg</font>
-                    <div id="drop-area">
-                          <input type="file" id="fileElem" required name="img" id="fileElem" accept=".jpeg" multiple accept="image/*" onchange="handleFiles(this.files)">
-                          <label class="button" for="fileElem">Seleziona file</label>
-                          <br />
-                        <progress id="progress-bar" max=100 value=0></progress>
-                        <div id="gallery"></div>
-                      </div>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-6 mt-4">
-                    <div class="col-span-3 sm:col-span-2">
-                      <label class="block text-sm font-medium text-gray-700">
-                        Quanti in stock? <a class="text-gray-200">scroll</a>
-                      </label>
-                        <input type="number" name="stock"  value="0" min="0" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="...">
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-3 gap-6 mt-4">
-                    <div class="col-span-3 sm:col-span-2">
-                      <label class="block text-sm font-medium text-gray-700" >
-                        Quanto costa? <a class="text-gray-200">scroll</a>
-                      </label>
-                        <input placeholder="€" type="number" name="prezzo"  value="0" min="0" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="...">
-                    </div>
-                    <p class=" mt-9" style="position:absolute;">
-                        €
-                    </p>
-                  </div>
-
-              </div>
-            </div>
-
-            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-              <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Salva
-              </button>
-
-            </div>
-          </div>
-        </form>
-      </div>
+@php
+    if($array['ncorsifine']=='[]'){
+        $array['ncorsifine']=0;
+    }
+@endphp
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard admin</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard admin</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
-  </div>
-  <style>
-      /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+    <!-- /.content-header -->
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
 
 
-label>a:hover {
-    color: black !important;
-}
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Vendite:</span>
+                <span class="info-box-number">{{$array['nacquisti']}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Nuovi utenti:</span>
+                <span class="info-box-number">{{$array['nuser']}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Accessi giornalieri</h5>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      <a href="#" class="dropdown-item">Action</a>
+                      <a href="#" class="dropdown-item">Another action</a>
+                      <a href="#" class="dropdown-item">Something else here</a>
+                      <a class="dropdown-divider"></a>
+                      <a href="#" class="dropdown-item">Separated link</a>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-8">
+
+                    <div class="chart">
+                      <!-- Sales Chart Canvas -->
+                      <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                    </div>
+                    <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-4">
+                    <p class="text-center">
+                      <strong>Goal Completion</strong>
+                    </p>
+
+                    <div class="progress-group">
+                      Corsi aggiunti al carrello
+                      <span class="float-right"><b>{{$array['ncarrello']}}</b>/40</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-primary" style="width: 15%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+
+                    <div class="progress-group">
+                      Acquisti completati
+                      <span class="float-right"><b>{{$array['nacquisti']}}</b>/40</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-danger" style="width: 20%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">Utenti abbonati</span>
+                      <span class="float-right"><b>{{$array['nabbonati']}}</b>/40</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-success" style="width: 8%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      Corsi al completo
+                      <span class="float-right"><b>{{$array['ncorsifine']}}</b>/{{$array['ncorsi']}}</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- ./card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <div class="col-md-8">
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <!-- USERS LIST -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Ultimi membri</h3>
+
+                    <div class="card-tools">
+                      <span class="badge badge-danger">{{$array['nuser']}} nuovi utenti</span>
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <ul class="users-list clearfix">
+
+                        @foreach ($array['user'] as $item)
+                        <li>
+                            <img src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png" alt="User Image">
+                            <a class="users-list-name" href="#">{{$item->name}}</a>
+                        </li>
+                        @endforeach
+
+                        <span class="users-list-date">Ultimo aggiornamento: Oggi</span>
+
+                    </ul>
+                    <!-- /.users-list -->
+                  </div>
+
+                  <!-- /.card-body -->
+                  <!-- /.card-footer -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!-- /.col -->
 
 
-#drop-area {
-  border: 2px dashed #ccc;
-  border-radius: 20px;
-  width: 480px;
-  font-family: sans-serif;
-  margin: 20px auto;
-  padding: 20px;
-}
-#drop-area.highlight {
-  border-color: purple;
-}
-p {
-  margin-top: 0;
-}
-.my-form {
-  margin-bottom: 10px;
-}
-#gallery {
-  margin-top: 10px;
-}
-#gallery img {
-  width: 150px;
-  margin-bottom: 10px;
-  margin-left: 32%;
+              <div class="col-md-6">
+                <!-- USERS LIST -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Ultimi istruttori</h3>
 
-  vertical-align: middle;
-}
-.button {
-  display: inline-block;
-  padding: 10px;
-  background: #ccc;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.button:hover {
-  background: #ddd;
-}
-#fileElem {
-  display: none;
-}
+                    <div class="card-tools">
+                      <span class="badge badge-success">{{$array['nistruttori']}} nuovi istruttori</span>
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <ul class="users-list clearfix">
 
-  </style>
-  <script>
-      // ************************ Drag and drop ***************** //
-let dropArea = document.getElementById("drop-area")
+                        @foreach ($array['istruttori'] as $item)
+                        <li>
+                            <img class="w-11/12" src="https://thumbs.dreamstime.com/z/insegnante-linea-icona-segno-di-vettore-del-profilo-pittogramma-lineare-dell-istruttore-di-stile-isolato-su-bianco-simbolo-del-92665319.jpg" alt="User Image">
+                            <a class="users-list-name" href="#">{{$item->nome_istr}}</a>
+                        </li>
+                        @endforeach
 
-// Prevent default drag behaviors
-;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-  dropArea.addEventListener(eventName, preventDefaults, false)
-  document.body.addEventListener(eventName, preventDefaults, false)
-})
 
-// Highlight drop area when item is dragged over it
-;['dragenter', 'dragover'].forEach(eventName => {
-  dropArea.addEventListener(eventName, highlight, false)
-})
+                    </ul><span class="users-list-date">Ultimo aggiornamento: Oggi</span>
+                    <!-- /.users-list -->
+                  </div>
 
-;['dragleave', 'drop'].forEach(eventName => {
-  dropArea.addEventListener(eventName, unhighlight, false)
-})
+                  <!-- /.card-body -->
+                  <!-- /.card-footer -->
+                </div>
+                <!--/.card -->
+              </div>
+            </div>
+            <!-- /.row -->
 
-// Handle dropped files
-dropArea.addEventListener('drop', handleDrop, false)
+            <!-- TABLE: LATEST ORDERS -->
+            <div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Ultimi acquisti</h3>
 
-function preventDefaults (e) {
-  e.preventDefault()
-  e.stopPropagation()
-}
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+                    <thead>
+                    <tr>
+                      <th>ID acquisto</th>
+                      <th>Nome</th>
+                      <th>Stato</th>
+                      <th>Utente</th>
+                      <th>Scadenza:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($array['acquisti'] as $item)
+                    <tr>
+                        <td><a href="pages/examples/invoice.html">{{$item->id_acqu}}</a></td>
+                        <td>{{$item->nome}}</td>
+                        <td><span class="badge badge-success">Acquistato</span></td>
+                        <td>
+                          <div class="sparkbar" data-color="#00a65a" data-height="20">{{$item->name}} {{$item->surname}}</div>
+                        </td>
+                        <td>
+                            <div class="sparkbar" data-color="#00a65a" data-height="20">{{$item->scade}}</div>
+                        </td>
+                      </tr>
+                    @endforeach
 
-function highlight(e) {
-  dropArea.classList.add('highlight')
-}
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
 
-function unhighlight(e) {
-  dropArea.classList.remove('active')
-}
+          <div class="col-md-4">
+            <!-- Info Boxes Style 2 -->
+            <div class="info-box mb-3 bg-warning">
+              <span class="info-box-icon"><i class="fas fa-tag"></i></span>
 
-function handleDrop(e) {
-  var dt = e.dataTransfer
-  var files = dt.files
+              <div class="info-box-content">
+                <span class="info-box-text">Inventario corsi</span>
+                <span class="info-box-number">{{$array['ncorsi']}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box mb-3 bg-success">
+                <span class="info-box-icon"><i class="fas fa-users"></i></span>
 
-  handleFiles(files)
-}
+              <div class="info-box-content">
+                <span class="info-box-text">Istruttori</span>
+                <span class="info-box-number">{{$array['nistruttori']}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box mb-3 bg-info">
+                <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
 
-let uploadProgress = []
-let progressBar = document.getElementById('progress-bar')
+              <div class="info-box-content">
+                <span class="info-box-text">Corsi aggiunti al carrello</span>
+                <span class="info-box-number">{{$array['ncarrello']}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
 
-function initializeProgress(numFiles) {
-  progressBar.value = 0
-  uploadProgress = []
+            <!-- PRODUCT LIST -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Ultimi corsi aggiunti</h3>
 
-  for(let i = numFiles; i > 0; i--) {
-    uploadProgress.push(0)
-  }
-}
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                  <!-- /.item -->
 
-function updateProgress(fileNumber, percent) {
-  uploadProgress[fileNumber] = percent
-  let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
-  console.debug('update', fileNumber, percent, total)
-  progressBar.value = total
-}
+                  @foreach ($array['corsirecenti'] as $item)
+                    <li class="item">
+                        <div class="product-img">
+                        <img src="{{ asset('copertine/' . $item->image) }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">{{$item->nome}}
+                            <span class="badge badge-success float-right">{{$item->prezzo}}€</span></a>
+                        <span class="product-description">
+                            {{$item->descrizione}}
+                        </span>
+                        </div>
+                    </li>
+                  @endforeach
 
-function handleFiles(files) {
-  files = [...files]
-  initializeProgress(files.length)
-  files.forEach(uploadFile)
-  files.forEach(previewFile)
-}
-
-function previewFile(file) {
-  let reader = new FileReader()
-  reader.readAsDataURL(file)
-  reader.onloadend = function() {
-    let img = document.createElement('img')
-    img.src = reader.result
-    document.getElementById('gallery').appendChild(img)
-  }
-}
-
-function uploadFile(file, i) {
-  var url = 'https://api.cloudinary.com/v1_1/joezimim007/image/upload'
-  var xhr = new XMLHttpRequest()
-  var formData = new FormData()
-  xhr.open('POST', url, true)
-  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-
-  // Update progress (can be used to show progress indicator)
-  xhr.upload.addEventListener("progress", function(e) {
-    updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
-  })
-
-  xhr.addEventListener('readystatechange', function(e) {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      updateProgress(i, 100) // <- Add this
-    }
-    else if (xhr.readyState == 4 && xhr.status != 200) {
-      // Error. Inform the user
-    }
-  })
-
-  formData.append('upload_preset', 'ujpu6gyk')
-  formData.append('file', file)
-  xhr.send(formData)
-}
-  </script>
-
+                  <!-- /.item -->
+                </ul>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer text-center">
+                <a href="/eliminacorsi"  class="uppercase">Vedi tutti i corsi</a>
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
 @endsection

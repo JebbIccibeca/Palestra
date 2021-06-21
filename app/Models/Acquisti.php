@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Acquisti extends Model
 {
     use HasFactory;
-    protected $table = "acquisto";
-    protected $fillable = ['id','id_prodotto','id_utente','created_at','updated_at'];
+    protected $table = "acquisti";
+    protected $fillable = ['id_acqu','id_corsi','id_utente','created_at','updated_at'];
 }

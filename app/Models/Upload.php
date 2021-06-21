@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Upload extends Model
 {
     use HasFactory;
-    protected $table = "inventario";
-    protected $fillable = ['titolo','data_uscita','image','protagonista','regista','etamin','stock','prezzo'];
+    protected $table = "corsi";
+    protected $primaryKey = "id_cors";
+    protected $fillable = ['nome','descrizione','tipo','durata','image','nmax','niscr','prezzo','istruttore'];
 }

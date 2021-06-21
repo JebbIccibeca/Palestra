@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Uploadistr;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -35,6 +36,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
+            'cf' => 'required|regex:/^[\w-]*$/',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
@@ -42,15 +44,28 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
+            'cf' => $request->cf,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $user->attachRole('user');
+
+        $istr = Uploadistr::select()->get();
+        $i = 0;
+
+        foreach($istr as $item){
+            if($user->name == $item['nome_istr']){
+                $user->attachRole('istruttore');
+                $i = 1;
+            }
+        }if($i == 0){
+            $user->attachRole('user');
+        }
 
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+
     }
 }

@@ -9,5 +9,5 @@ class carrello extends Model
 {
     use HasFactory;
     protected $table = "carrello";
-    protected $fillable = ['id_prodotto','id_utente'];
+    protected $fillable = ['id_cart','id_corso','id_utente'];
 }

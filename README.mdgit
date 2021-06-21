@@ -1,0 +1,2 @@
+"# Palestra"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/JebbIccibeca/Palestra.gitgit push -u origin main
+"# Palestra"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/JebbIccibeca/Palestra.gitgit push -u origin main

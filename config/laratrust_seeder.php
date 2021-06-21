@@ -17,6 +17,9 @@ return [
             'payments' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
+        'istruttore' => [
+            'profile' => 'r,u',
+        ],
         'user' => [
             'profile' => 'r,u',
         ]

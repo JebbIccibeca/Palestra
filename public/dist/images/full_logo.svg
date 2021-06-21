@@ -1,0 +1,34 @@
+<svg width="117" height="83" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+
+  <g transform="rotate(-0.00826778, 56.2748, 42.3417)" id="svg_17">
+   <g id="svg_12" fill-rule="evenodd" fill="none">
+    <path id="svg_13" d="m76.74122,31.53714l-20.46276,-10.80441l-20.46569,10.80441l0,21.60882l20.46569,10.80441l20.46276,-10.80441l0,-21.60882z" fill="url(#svg_10)"/>
+    <path id="svg_14" d="m56.27705,20.73261l0,43.21765l-20.46422,-10.80441l0,-21.60882l20.46422,-10.80441z" fill="url(#svg_9)"/>
+    <path id="svg_15" d="m76.74127,53.14585l-40.92845,-21.60882l20.46569,-10.80441l20.46276,10.80441l0,21.60882z" fill="url(#svg_8)"/>
+    <path id="svg_16" d="m76.74127,31.53703l-40.92845,21.57911l0,-21.57911l20.46569,-10.80441l20.46276,10.80441z" fill="url(#svg_7)" fill-opacity="0.48"/>
+   </g>
+  </g>
+  <text transform="rotate(28.6671, 38.1609, 49.5613) matrix(0.43047, 0, 0, 0.718975, 951.272, 143.888)" font-style="normal" font-weight="normal" xml:space="preserve" text-anchor="start" font-family="'Anton'" font-size="26" id="svg_19" y="-120.28829" x="-2158.68817" stroke-width="0" stroke="#000" fill="#00ffdd">Fitness</text>
+  <text transform="rotate(-30.8644, 72.8144, 49.5024) matrix(0.46708, 0, 0, 0.670054, 58.2647, 21.0091)" xml:space="preserve" text-anchor="start" font-family="'Anton'" font-size="26" id="svg_20" y="53.50366" x="-0.80409" stroke-width="0" stroke="#000" fill="#00ffdd">House</text>
+ </g>
+ <defs>
+  <linearGradient id="svg_10" y2="100%" x2="50%" y1="0%" x1="50%">
+   <stop offset="0%" stop-color="#00BFFB"/>
+   <stop offset="100%" stop-color="#0270D7"/>
+  </linearGradient>
+  <linearGradient id="svg_9" y2="100%" x2="50%" y1="0%" x1="50%">
+   <stop offset="0%" stop-opacity="0.48" stop-color="#1F232A"/>
+   <stop offset="100%" stop-opacity="0" stop-color="#1F2329"/>
+  </linearGradient>
+  <linearGradient id="svg_8" y2="38.807%" x2="-3.169%" y1="103.739%" x1="87.665%">
+   <stop offset="0%" stop-opacity="0" stop-color="#FFF"/>
+   <stop offset="100%" stop-opacity="0.64" stop-color="#FFF"/>
+  </linearGradient>
+  <linearGradient id="svg_7" y2="26.355%" x2="109.871%" y1="111.262%" x1="-14.104%">
+   <stop offset="0%" stop-color="#0270D7"/>
+   <stop offset="100%" stop-opacity="0" stop-color="#0270D7"/>
+  </linearGradient>
+ </defs>
+</svg>
